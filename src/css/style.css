@@ -24,15 +24,14 @@
   --font-size-5: 16px;
   --font-size-6: 15px;
   --font-size-7: 14px;
+
+  font-family: var(--font-family);
 }
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  font-family: var(--font-family);
-
 }
 
 html{
@@ -135,4 +134,75 @@ button{
 .btn-number:hover{
   background-color: var(--color-text);
 
+}
+
+h1{
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  color: var(--color-titles);
+  text-transform: uppercase;
+}
+
+h2{
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  color: var(--color-titles);
+  text-transform: uppercase;
+}
+
+h2>span{
+  font-size: inherit;
+  font-weight: var(--font-weight-regular);
+  font-style: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+h3{
+  font-size: var(--font-size-4);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  color: var(--color-text);
+}
+
+p{
+  font-size: var(--font-size-4);
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+  color: var(--color-text);
+}
+
+p.small{
+  font-size: var(--font-size-6);
+  font-weight: var(--font-weight-bold);
+}
+
+p.price{
+  font-size: var(--font-size-5);
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
+}
+
+p.lotofacil{
+  font-size: var(--font-size-5);
+  color: var(--color-lotofacil);
+}
+
+p.lotomania{
+  font-size: var(--font-size-5);
+  color: var(--color-lotomania);
+}
+
+p.megasena{
+  font-size: var(--font-size-5);
+  color: var(--color-megasena);
+}
+
+p.copyright{
+  color: var(--color-titles);
+  font-size: var(--font-size-6);
+  font-weight: var(--font-weight-regular);
+  text-align: center;
 }
