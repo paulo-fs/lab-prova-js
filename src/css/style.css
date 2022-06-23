@@ -14,9 +14,9 @@
   --color-numbers: #ADC0C4;
 
   --font-family: 'Helvetica Neue', sans-serif;
-  --font-weight-bold: 900;
-  --font-weight-medium: 700;
-  --font-weight-regular: 500;
+  --font-weight-bold: 700;
+  --font-weight-medium: 600;
+  --font-weight-regular: 400;
   --font-size-1: 44px;
   --font-size-2: 35px;
   --font-size-3: 24px;
@@ -39,8 +39,18 @@ html{
   scroll-behavior: smooth;
 }
 
+body{
+  background-color: var(--color-background);
+  padding: 16px 148px;
+  max-width: 1366px;
+}
+
 button{
   cursor: pointer;
+}
+
+a{
+  text-decoration: none;
 }
 
 .btn-primary{
@@ -119,11 +129,11 @@ button{
 }
 
 .btn-number{
+  width: 65px;
+  height: 65px;
   font-size: var(--font-size-4);
   font-weight: var(--font-weight-bold);
   color: var(--color-white);
-  width: 65px;
-  height: 65px;
   background-color: var(--color-numbers);
   border: none;
   border-radius: 50%;
@@ -158,6 +168,11 @@ h2>span{
   font-style: inherit;
   color: inherit;
   text-transform: inherit;
+}
+
+h2.total{
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
 }
 
 h3{
@@ -205,4 +220,55 @@ p.copyright{
   font-size: var(--font-size-6);
   font-weight: var(--font-weight-regular);
   text-align: center;
+}
+
+.menu{
+  width: 100%;    height: 58px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--color-dividers);
+}
+
+.menu-logo{
+  margin-right: 74px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.menu-logo>.underBar{
+  width: 107px;   height: 7px;
+  border-radius: 4px;
+  background-color: var(--color-tgl);
+  position: absolute;
+  bottom: -4px;   right: -9px;
+}
+
+.menu-links{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-links-account{
+  display: flex;
+  gap: 24px;
+}
+
+.menu-link{
+  color: var(--color-titles);
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-link>img{
+  width: 21px;
+  height: 17px;
 }
