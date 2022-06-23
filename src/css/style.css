@@ -13,10 +13,10 @@
   --color-button-save: #F4F4F4;
   --color-numbers: #ADC0C4;
 
-  --font-family: 'Helvetica Neue', sans-serif;
+  --font-family: 'HelveticaNeue-Light', sans-serif;
   --font-weight-bold: 700;
   --font-weight-medium: 600;
-  --font-weight-regular: 400;
+  --font-weight-regular: 300;
   --font-size-1: 44px;
   --font-size-2: 35px;
   --font-size-3: 24px;
@@ -62,14 +62,19 @@ a{
   padding: 14px 25px;
   border: 1px solid var(--color-green);
   border-radius: 10px;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .btn-primary:hover{
-  background-color: #76caa7;
+  background-color: var(--color-megasena);
 }
 
 .btn-primary>img{
-  width: 26px;
+  width: 24px;
+  height: 24px;
   height: auto;
 }
 
@@ -81,9 +86,10 @@ a{
   padding: 16px 25px;
   border: 1px solid var(--color-green);
   border-radius: 10px;
+  transition: 0.2s ease;
 }
 
-.btn-secondary{
+.btn-secondary:hover{
   background-color: var(--color-green);
   color: var(--color-white);
 }
@@ -93,8 +99,9 @@ a{
   font-weight: var(--font-weight-bold);
   font-style: italic;
   padding: 8px 28px;
-  border: 2px;
-  border-radius: 50%;
+  border: 2px solid;
+  border-radius: 32px;
+  transition: 0.2s ease;
 }
 
 .btn-game:hover{
@@ -139,11 +146,33 @@ a{
   border-radius: 50%;
   display: grid;
   place-content: center;
+  transition: 0.2s ease;
 }
 
 .btn-number:hover{
   background-color: var(--color-text);
 
+}
+
+.btn-save-cart{
+  font-size: var(--font-size-2);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  color: var(--color-green);
+  background-color: var(--color-button-save);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.2s ease;
+}
+
+.btn-save-cart>img{
+  width: 26px;    height: 26px;
+}
+
+.btn-save-cart:hover{
+  color: var(--color-megasena);
 }
 
 h1{
@@ -201,16 +230,19 @@ p.price{
 }
 
 p.lotofacil{
+  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-5);
   color: var(--color-lotofacil);
 }
 
 p.lotomania{
+  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-5);
   color: var(--color-lotomania);
 }
 
 p.megasena{
+  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-5);
   color: var(--color-megasena);
 }
@@ -227,6 +259,7 @@ p.copyright{
   display: flex;
   align-items: center;
   border-bottom: 2px solid var(--color-dividers);
+  margin-bottom: 44px;
 }
 
 .menu-logo{
@@ -271,4 +304,14 @@ p.copyright{
 .menu-link>img{
   width: 21px;
   height: 17px;
+}
+
+main{
+  padding: 32px 0;
+  display: flex;
+}
+
+.cart-item>img{
+  width: 20px;
+  height: 24px;
 }
