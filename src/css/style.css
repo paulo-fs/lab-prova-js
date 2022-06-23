@@ -1,0 +1,138 @@
+:root{
+  --color-white: #fff;
+  --color-green: #27C383;
+  --color-background: #F7F7F7;
+  --color-titles: #707070;
+  --color-dividers: #EBEBEB;
+  --color-text: #868686;
+  --color-cart-border: #E2E2E2;
+  --color-tgl: #B5C401;
+  --color-lotofacil: #7F3992;
+  --color-megasena: #01AC66;
+  --color-lotomania: #F79C31;
+  --color-button-save: #F4F4F4;
+  --color-numbers: #ADC0C4;
+
+  --font-family: 'Helvetica Neue', sans-serif;
+  --font-weight-bold: 900;
+  --font-weight-medium: 700;
+  --font-weight-regular: 500;
+  --font-size-1: 44px;
+  --font-size-2: 35px;
+  --font-size-3: 24px;
+  --font-size-4: 20px;
+  --font-size-5: 16px;
+  --font-size-6: 15px;
+  --font-size-7: 14px;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: var(--font-family);
+
+}
+
+html{
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+button{
+  cursor: pointer;
+}
+
+.btn-primary{
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-6);
+  text-align: center;
+  color: var(--color-white);
+  background-color: var(--color-green);
+  padding: 14px 25px;
+  border: 1px solid var(--color-green);
+  border-radius: 10px;
+}
+
+.btn-primary:hover{
+  background-color: #76caa7;
+}
+
+.btn-primary>img{
+  width: 26px;
+  height: auto;
+}
+
+.btn-secondary{
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-6);
+  color: var(--color-green);
+  background-color: none;
+  padding: 16px 25px;
+  border: 1px solid var(--color-green);
+  border-radius: 10px;
+}
+
+.btn-secondary{
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.btn-game{
+  font-size: var(--font-size-7);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+  padding: 8px 28px;
+  border: 2px;
+  border-radius: 50%;
+}
+
+.btn-game:hover{
+  color: var(--color-white);
+}
+
+.btn-game--mega{
+  color: var(--color-megasena);
+  border-color: var(--color-megasena);
+}
+
+.btn-game--mega:hover{
+  background-color: var(--color-megasena);
+}
+
+.btn-game--lotofacil{
+  color: var(--color-lotofacil);
+  border-color: var(--color-lotofacil);
+}
+
+.btn-game--lotofacil:hover{
+  background-color: var(--color-lotofacil);
+}
+
+.btn-game--lotomania{
+  color: var(--color-lotomania);
+  border-color: var(--color-lotomania);
+}
+
+.btn-game--lotomania:hover{
+  background-color: var(--color-lotomania);
+}
+
+.btn-number{
+  font-size: var(--font-size-4);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  width: 65px;
+  height: 65px;
+  background-color: var(--color-numbers);
+  border: none;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+}
+
+.btn-number:hover{
+  background-color: var(--color-text);
+
+}
