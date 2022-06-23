@@ -1,0 +1,29 @@
+:root{
+  --color-white: #fff;
+  --color-green: #27C383;
+  --color-background: #F7F7F7;
+  --color-titles: #707070;
+  --color-dividers: #EBEBEB;
+  --color-text: #868686;
+  --color-cart-border: #E2E2E2;
+  --color-tgl: #B5C401;
+  --color-lotofacil: #7F3992;
+  --color-megasena: #01AC66;
+  --color-lotomania: #F79C31;
+  --color-button-save: #F4F4F4;
+  --color-numbers: #ADC0C4;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: var(--text-body-font);
+
+}
+
+html{
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
