@@ -2,7 +2,7 @@
 
 ### Links uteis
 [Protótipo](https://xd.adobe.com/view/4bd3fba7-f671-4202-b5e2-17137367ef1d-1e80/screen/8497f9e8-5eff-4ae8-8380-b1874cd674c0/specs/)
-[]()
+[CDN Font Helvética Neue](https://www.cdnfonts.com/helvetica-neue-9.font)
 
 O último teste do módulo de Javascript consiste em criar uma página seguindo este protótipo (somente a página de apostas)
 
