@@ -5,25 +5,56 @@
     return {
       init: function (){
         console.log('app started');
-        this.initialScreen (0);
+        this.requireData (this.loadStartScreen);
       },
 
-      initialScreen: function initialScreen (index){
-        this.loadGameData (index);
+      loadStartScreen: function loadStartScreen (){
+        if(this.readyState !== 4 && this.state !== 200)
+          return;
+        const data = JSON.parse(this.responseText).types;
+        app.fillPageContent(data[0]);
+        app.createGameOptions(data);
+        app.createBetNumbers(data);
+      },
+      
+      fillPageContent: function fillPageContent (data){
+        let gameType = DOM('[data-js="type"]').get();
+        let betDescription = DOM('[data-js="bet-description"]').get();
+        
+        gameType.textContent = 'for ' + data.type;
+        betDescription.textContent = data.description;
+      },
+      
+      createGameOptions: function createGameOptions (data){
+        let avaliableGames = DOM ('[data-js="avaliable-games"]').get();
+        data.forEach(game => {
+          let button = doc.createElement('button');
+          button.setAttribute('class', app.insertClassOnButton(game));
+          button.textContent = game.type;
+          avaliableGames.appendChild(button);
+        });
       },
 
-      loadGameData: function loadGameData (index){
-        let ajax = new XMLHttpRequest();
-        ajax.open ('GET', './src/data/games.json');
-        ajax.send ();
-        return ajax.onreadystatechange = function (){
-          if(app.isReady (ajax))
-            console.log(JSON.parse(ajax.responseText).types[index])
+      insertClassOnButton: function insertClassOnButton(game){
+        switch(game.type){
+          case 'Lotofácil':
+            return 'btn-game btn-game--lotofacil';
+          case 'Mega-Sena':
+            return 'btn-game btn-game--mega';
+          case 'Quina':
+            return 'btn-game btn-game--quina'
         }
       },
 
-      isReady: function isReady (ajax){
-        return (ajax.readyState === 4 && ajax.status === 200)
+      createBetNumbers: function createBetNumbers(data){
+        
+      },
+
+      requireData: function requireData (callback){
+        let ajax = new XMLHttpRequest();
+        ajax.open ('GET', './src/data/games.json');
+        ajax.send ();
+        ajax.addEventListener('readystatechange', callback, false);
       },
     }
   })();
