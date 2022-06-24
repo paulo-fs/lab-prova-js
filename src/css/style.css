@@ -26,7 +26,7 @@
   --font-size-7: 12px;
 
   --width-page: 1366px;
-  --padding-x: 148px;
+  --padding-x: 120px;
 
   font-family: var(--font-family);
 }
@@ -45,7 +45,7 @@ html{
 body{
   background-color: var(--color-background);
   max-width: var(--width-page);
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   border: 2px solid var(--color-dividers);
 }
@@ -87,7 +87,7 @@ a{
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-6);
   color: var(--color-green);
-  background-color: none;
+  background-color: var(--color-background);
   padding: 15px 25px;
   border: 1px solid var(--color-green);
   border-radius: 10px;
@@ -220,6 +220,7 @@ p{
   font-size: var(--font-size-4);
   font-weight: var(--font-weight-regular);
   font-style: italic;
+  line-height: 140%;
   color: var(--color-text);
 }
 
@@ -313,12 +314,49 @@ p.copyright{
 }
 
 main{
-  padding: 32px var(--padding-x);
+  padding: 0 var(--padding-x);
   display: flex;
 }
 
-.cart{
-  width: 400px;   height: auto;
+section.game-bet{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.games>h3{
+  margin-bottom: 8px;
+}
+
+.games-choose-buttons{
+  display: flex;
+  gap: 24px;
+}
+
+.games-description>h3{
+  margin-bottom: 8px;
+}
+
+.games-numbers{
+  margin-top: -16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.game-config{
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-config-complete-clear{
+  display: flex;
+  gap: 24px;
+}
+
+aside.cart{
+  width: 456px;   height: fit-content;
   margin-left: min(38px, 54px);
   border: 2px solid var(--color-cart-border);
   border-radius: 10px;
@@ -329,7 +367,7 @@ main{
 }
 
 .cart-container{
-  padding: 32px 20px;
+  padding: 32px 8px 32px 20px;
 }
 
 .cart-itens{
@@ -373,8 +411,8 @@ main{
 }
 
 .cart-item>img{
-  width: 20px;
-  height: 24px;
+  width: 18px;
+  height: 21px;
 }
 
 .cart-save{
@@ -384,4 +422,10 @@ main{
   place-content: center;
   background-color: var(--color-button-save);
   border-radius: 0 0 10px 10px;
+}
+
+footer{
+  margin-top: 140px;
+  padding: 32px 0px;
+  border-top: 2px solid var(--color-dividers);
 }
