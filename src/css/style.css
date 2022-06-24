@@ -9,7 +9,7 @@
   --color-tgl: #B5C401;
   --color-lotofacil: #7F3992;
   --color-megasena: #01AC66;
-  --color-lotomania: #F79C31;
+  --color-quina: #F79C31;
   --color-button-save: #F4F4F4;
   --color-numbers: #ADC0C4;
 
@@ -132,13 +132,13 @@ a{
   background-color: var(--color-lotofacil);
 }
 
-.btn-game--lotomania{
-  color: var(--color-lotomania);
-  border-color: var(--color-lotomania);
+.btn-game--quina{
+  color: var(--color-quina);
+  border-color: var(--color-quina);
 }
 
-.btn-game--lotomania:hover{
-  background-color: var(--color-lotomania);
+.btn-game--quina:hover{
+  background-color: var(--color-quina);
 }
 
 .btn-number{
@@ -242,10 +242,10 @@ p.lotofacil{
   color: var(--color-lotofacil);
 }
 
-p.lotomania{
+p.quina{
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-5);
-  color: var(--color-lotomania);
+  color: var(--color-quina);
 }
 
 p.megasena{
@@ -398,8 +398,8 @@ aside.cart{
   border-left: 4px solid var(--color-megasena);
 }
 
-.cart-item-lotomania{
-  border-left: 4px solid var(--color-lotomania);
+.cart-item-quina{
+  border-left: 4px solid var(--color-quina);
 }
 
 .cart-item-lotofacil{
