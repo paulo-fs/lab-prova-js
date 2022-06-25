@@ -100,12 +100,13 @@ a{
 }
 
 .btn-game{
+  --color-game: var(var(--color-white));
   font-size: var(--font-size-7);
   font-weight: var(--font-weight-bold);
   font-style: italic;
   padding: 8px 28px;
-  background-color: var(--color-white);
-  border: 2px solid;
+  background-color: var(--color-background);
+  border: 2px solid var(--color-game);
   border-radius: 32px;
   transition: 0.2s ease;
 }
@@ -115,30 +116,34 @@ a{
 }
 
 .btn-game--mega{
-  color: var(--color-megasena);
-  border-color: var(--color-megasena);
+  --color-game: var(--color-megasena);
+  color: var(--color-game);
 }
 
 .btn-game--mega:hover{
-  background-color: var(--color-megasena);
+  background-color: var(--color-game);
 }
 
 .btn-game--lotofacil{
-  color: var(--color-lotofacil);
-  border-color: var(--color-lotofacil);
+  --color-game: var(--color-lotofacil);
+  color: var(--color-game);
 }
 
 .btn-game--lotofacil:hover{
-  background-color: var(--color-lotofacil);
+  background-color: var(--color-game);
 }
 
 .btn-game--quina{
-  color: var(--color-quina);
-  border-color: var(--color-quina);
+  --color-game: var(--color-quina);
+  color: var(--color-game);
 }
 
 .btn-game--quina:hover{
-  background-color: var(--color-quina);
+  background-color: var(--color-game);
+}
+
+.active{
+  background-color: var(--color-game);
 }
 
 .btn-number{
