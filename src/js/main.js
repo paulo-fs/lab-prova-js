@@ -48,6 +48,7 @@
       },
 
       gameSelect: function gameSelect(game){
+        this.classList.toggle('active');
         console.log(this)
       },
 
