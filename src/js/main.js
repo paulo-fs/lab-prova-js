@@ -12,9 +12,34 @@
         if(this.readyState !== 4 && this.state !== 200)
           return;
         const data = JSON.parse(this.responseText).types;
-        app.fillPageContent(data[0]);
         app.createGameOptions(data);
+        app.handleToggleGames(data);
+        app.fillPageContent(data[0]);
         app.createBetNumbers(data[0]);
+      },
+
+      handleToggleGames: function(data){
+        let buttons = Array.from(doc.querySelectorAll('.btn-game'));
+        let lotofacil = DOM('.btn-game--lotofacil').get();
+        let megasena = DOM('.btn-game--mega').get();
+        let quina = DOM('.btn-game--quina').get();
+
+        lotofacil.classList.add('active');
+        buttons.forEach((button, index) => {
+          button.addEventListener('click', () => {
+            lotofacil.classList.remove('active') || '';
+            megasena.classList.remove('active') || '';
+            quina.classList.remove('active') || '';
+            button.classList.toggle('active');
+            app.loadSelectedGameContent(data[index]);
+          });
+        });
+      },
+
+      loadSelectedGameContent: function loadSelectedGameContent(data){
+        let divNumbers = DOM('[data-js="game-numbers"]').get().textContent = '';
+        app.fillPageContent(data);
+        app.createBetNumbers(data);
       },
       
       fillPageContent: function fillPageContent (data){
@@ -31,7 +56,6 @@
           let button = doc.createElement('button');
           button.setAttribute('class', app.insertClassOnButton(game));
           button.textContent = game.type;
-          button.addEventListener('click', this.gameSelect);
           avaliableGames.appendChild(button);
         });
       },
@@ -47,11 +71,6 @@
         }
       },
 
-      gameSelect: function gameSelect(game){
-        this.classList.toggle('active');
-        console.log(this)
-      },
-
       createBetNumbers: function createBetNumbers(data){
         const range = data.range;
         let divNumbers = DOM('[data-js="game-numbers"]').get();
@@ -62,7 +81,6 @@
           button.addEventListener('click', this.selectNumbers);
           divNumbers.appendChild(button);
         }
-        console.log(range)
       },
 
       selectNumbers: function selectNumbers(){
