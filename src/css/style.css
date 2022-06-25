@@ -111,10 +111,6 @@ a{
   transition: 0.2s ease;
 }
 
-.btn-game:hover{
-  color: var(--color-white);
-}
-
 .btn-game--mega{
   --color-game: var(--color-megasena);
   color: var(--color-game);
@@ -122,6 +118,7 @@ a{
 
 .btn-game--mega:hover{
   background-color: var(--color-game);
+  color: var(--color-white);
 }
 
 .btn-game--lotofacil{
@@ -131,6 +128,7 @@ a{
 
 .btn-game--lotofacil:hover{
   background-color: var(--color-game);
+  color: var(--color-white);
 }
 
 .btn-game--quina{
@@ -140,10 +138,12 @@ a{
 
 .btn-game--quina:hover{
   background-color: var(--color-game);
+  color: var(--color-white);
 }
 
 .active{
   background-color: var(--color-game);
+  color: var(--color-white);
 }
 
 .btn-number{
