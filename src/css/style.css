@@ -160,9 +160,8 @@ a{
   transition: 0.2s ease;
 }
 
-.btn-number:hover{
+.btn-number:hover, .activeNumber{
   background-color: var(--color-text);
-
 }
 
 .btn-save-cart{
