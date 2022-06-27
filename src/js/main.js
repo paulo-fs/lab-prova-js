@@ -1,4 +1,4 @@
-(function(win, DOM, doc){
+(function(win, doc){
   'use strict'
 
   let app = (function (){
@@ -16,20 +16,18 @@
         app.handleToggleGames(data);
         app.fillPageContent(data[0]);
         app.createBetNumbers(data[0]);
+        app.actualBet;
+        app.handleBet(data[0]);
       },
 
       handleToggleGames: function(data){
         let buttons = Array.from(doc.querySelectorAll('.btn-game'));
-        let lotofacil = DOM('.btn-game--lotofacil').get();
-        let megasena = DOM('.btn-game--mega').get();
-        let quina = DOM('.btn-game--quina').get();
+        let lotofacil = doc.querySelector('.btn-game--lotofacil');
 
         lotofacil.classList.add('active');
         buttons.forEach((button, index) => {
           button.addEventListener('click', () => {
-            lotofacil.classList.remove('active') || '';
-            megasena.classList.remove('active') || '';
-            quina.classList.remove('active') || '';
+            buttons.forEach(eachButton => eachButton.classList.remove('active') || '');
             button.classList.toggle('active');
             app.loadSelectedGameContent(data[index]);
           });
@@ -37,21 +35,22 @@
       },
 
       loadSelectedGameContent: function loadSelectedGameContent(data){
-        let divNumbers = DOM('[data-js="game-numbers"]').get().textContent = '';
+        DOM('[data-js="game-numbers"]').get().textContent = '';
         app.fillPageContent(data);
         app.createBetNumbers(data);
+        app.handleBet(data);
       },
       
       fillPageContent: function fillPageContent (data){
-        let gameType = DOM('[data-js="type"]').get();
-        let betDescription = DOM('[data-js="bet-description"]').get();
+        let gameType = doc.querySelector('[data-js="type"]');
+        let betDescription = doc.querySelector('[data-js="bet-description"]');
         
         gameType.textContent = 'for ' + data.type;
         betDescription.textContent = data.description;
       },
       
       createGameOptions: function createGameOptions (data){
-        let avaliableGames = DOM ('[data-js="avaliable-games"]').get();
+        let avaliableGames = doc.querySelector('[data-js="avaliable-games"]');
         data.forEach(game => {
           let button = doc.createElement('button');
           button.setAttribute('class', app.insertClassOnButton(game));
@@ -73,18 +72,29 @@
 
       createBetNumbers: function createBetNumbers(data){
         const range = data.range;
-        let divNumbers = DOM('[data-js="game-numbers"]').get();
+        let divNumbers = doc.querySelector('[data-js="game-numbers"]');
         for(let i = 1; i <= range; i++){
           let button = doc.createElement('button');
           button.classList.add('btn-number');
           button.textContent = i;
           button.addEventListener('click', this.selectNumbers);
           divNumbers.appendChild(button);
-        }
+        };
       },
+      
+      actualBet: [],
 
       selectNumbers: function selectNumbers(){
-        console.log('clicou', this.textContent);
+        app.actualBet.push(this.textContent);
+        // console.log(app.actualBet)
+      },
+
+      handleBet: function handleBet(data){
+        const maxSelectedNumbers = data.min_and_max_number;
+        const price = data.price;
+        app.actualBet.length = maxSelectedNumbers;
+
+        console.log(maxSelectedNumbers, price);
       },
 
       requireData: function requireData (callback){
@@ -99,4 +109,4 @@
   app.init();
 
 
-})(window, window.DOM, document);
+})(window, document);
