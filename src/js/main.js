@@ -8,6 +8,7 @@
         this.requireData (this.loadStartScreen);
         doc.querySelector('[data-js="complete-game"]').addEventListener('click', app.handleGameBet.completeGame);
         doc.querySelector('[data-js="clear-game"]').addEventListener('click', app.handleGameBet.clearGame);
+        doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', app.handleGameBet.addToCart);
       },
 
       loadStartScreen: function loadStartScreen (){
@@ -103,39 +104,49 @@
           return this.data.range;
         },
 
-        selectedNumbers:  function selectedNumbers(arr){
-          return arr.filter(selected => {
+        selectedNumbers:  function selectedNumbers(){
+          let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
+          return numbers.filter(selected => {
             return selected.className === 'btn-number activeNumber';
           });
         },
 
-        notSelectedNumbers: function notSelectedNumbers(arr){
-          return arr.filter(selected => {
+        notSelectedNumbers: function notSelectedNumbers(){
+          let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
+          return numbers.filter(selected => {
             return selected.className !== 'btn-number activeNumber';
           });
         },
 
+        missingNumber: function missingNumber(){
+          let selected = app.handleGameBet.selectedNumbers();
+          let missing = app.handleGameBet.maxNumbers() - selected.length;
+          return missing;
+        },
+
         handleNumbers: function(num){
-          let totalNumbers = Array.from(num.parentNode.children);
-          let totalNumbersSelected = this.selectedNumbers(totalNumbers);
+          let totalNumbersSelected = this.selectedNumbers();
           if(totalNumbersSelected.length < this.maxNumbers()){
             return num.classList.toggle('activeNumber');
           } 
-          alert('The game is alread complete, add this game in the cart!');
+          alert('The game is alread complete, add this game to cart!');
         },
 
         completeGame: function completeGame(){
-          let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
-          let selected = app.handleGameBet.selectedNumbers(numbers);
-          let notSelected = app.handleGameBet.notSelectedNumbers(numbers);
-          let missing = app.handleGameBet.maxNumbers() - selected.length;
-          if(missing === 0)
-            return alert('The game is alread complete, add this game in the cart!');
-          for(let i = 0; i < missing; i++){
+          let notSelected = app.handleGameBet.notSelectedNumbers();
+          if(app.handleGameBet.missingNumber() === 0)
+            return alert('The game is alread complete, add this game to cart!');
+          for(let i = 0; i < app.handleGameBet.missingNumber(); i++){
             notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+            if(app.handleGameBet.missingNumber() !== 0)
+              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+            if(app.handleGameBet.missingNumber() !== 0)
+              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+            if(app.handleGameBet.missingNumber() !== 0)
+              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
           }
           console.log('aleatorio', Math.floor(Math.random() * notSelected.length))
-          console.log('complete', notSelected.length, selected.length, missing);
+          console.log('complete', notSelected.length, app.handleGameBet.missingNumber());
         },
 
         clearGame: function clearGame(){
@@ -143,6 +154,10 @@
           app.handleGameBet.betNumbers.length = 0;
           return selectedNumbers.forEach(number => number.classList.remove('activeNumber')) || '';
         },
+
+        addToCart: function addToCart(){
+          console.log('add to cart', this)
+        }
       },
 
       requireData: function requireData (callback){
