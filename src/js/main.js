@@ -89,7 +89,6 @@
       },
 
       handleGameBet: {
-        betNumbers: [],
         data: {},
 
         maxNumbers: function maxNumbers(){
@@ -104,14 +103,18 @@
           return this.data.range;
         },
 
-        selectedNumbers:  function selectedNumbers(){
+        type: function type(){
+          return this.data.type;
+        },
+
+        selectedElements:  function selectedElements(){
           let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
           return numbers.filter(selected => {
             return selected.className === 'btn-number activeNumber';
           });
         },
 
-        notSelectedNumbers: function notSelectedNumbers(){
+        notselectedElements: function notselectedElements(){
           let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
           return numbers.filter(selected => {
             return selected.className !== 'btn-number activeNumber';
@@ -119,13 +122,13 @@
         },
 
         missingNumber: function missingNumber(){
-          let selected = app.handleGameBet.selectedNumbers();
+          let selected = app.handleGameBet.selectedElements();
           let missing = app.handleGameBet.maxNumbers() - selected.length;
           return missing;
         },
 
         handleNumbers: function(num){
-          let totalNumbersSelected = this.selectedNumbers();
+          let totalNumbersSelected = this.selectedElements();
           if(totalNumbersSelected.length < this.maxNumbers()){
             return num.classList.toggle('activeNumber');
           } 
@@ -133,7 +136,7 @@
         },
 
         completeGame: function completeGame(){
-          let notSelected = app.handleGameBet.notSelectedNumbers();
+          let notSelected = app.handleGameBet.notselectedElements();
           if(app.handleGameBet.missingNumber() === 0)
             return alert('The game is alread complete, add this game to cart!');
           for(let i = 0; i < app.handleGameBet.missingNumber(); i++){
@@ -150,13 +153,20 @@
         },
 
         clearGame: function clearGame(){
-          let selectedNumbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
-          app.handleGameBet.betNumbers.length = 0;
-          return selectedNumbers.forEach(number => number.classList.remove('activeNumber')) || '';
+          let selectedElements = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
+          return selectedElements.forEach(number => number.classList.remove('activeNumber')) || '';
         },
 
         addToCart: function addToCart(){
-          console.log('add to cart', this)
+          if(app.handleGameBet.missingNumber() !== 0)
+            return alert('Is missing ' + app.handleGameBet.missingNumber() +  ' numbers. Please, complete the game before add to cart!')
+          const selected = app.handleGameBet.selectedElements();
+          const selectedNumbers = selected.map(selected => selected.textContent);
+          console.log ({
+            bet: selectedNumbers,
+            betType: app.handleGameBet.type(),
+            betPrice: app.handleGameBet.price(),
+          });
         }
       },
 
