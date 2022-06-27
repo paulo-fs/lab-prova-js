@@ -19,7 +19,7 @@
     },
     {
       "type": "Quina",
-      "description": "Choose 5 numbers of 80 avaliable on quina. Win by hitting 5, 4, 3, or 2. Six seeptakes are made by week and six chances to win.",
+      "description": "Choose 5 numbers of 80 avaliable on quina. Win by hitting 5, 4, 3, or 2. Six sweeptakes are made by week and six chances to win.",
       "range": 80,
       "price": 2,
       "min_and_max_number": 5,
