@@ -6,6 +6,8 @@
       init: function (){
         console.log('app started');
         this.requireData (this.loadStartScreen);
+        doc.querySelector('[data-js="complete-game"]').addEventListener('click', app.handleGameBet.completeGame);
+        doc.querySelector('[data-js="clear-game"]').addEventListener('click', app.handleGameBet.clearGame);
       },
 
       loadStartScreen: function loadStartScreen (){
@@ -14,10 +16,9 @@
         const data = JSON.parse(this.responseText).types;
         app.createGameOptions(data);
         app.handleToggleGames(data);
+        app.handleGameBet.data = data[0];
         app.fillPageContent(data[0]);
         app.createBetNumbers(data[0]);
-        app.actualBet;
-        app.handleBet(data[0]);
       },
 
       handleToggleGames: function(data){
@@ -35,10 +36,10 @@
       },
 
       loadSelectedGameContent: function loadSelectedGameContent(data){
-        DOM('[data-js="game-numbers"]').get().textContent = '';
+        doc.querySelector('[data-js="game-numbers"]').textContent = '';
         app.fillPageContent(data);
         app.createBetNumbers(data);
-        app.handleBet(data);
+        app.handleGameBet.data = data;
       },
       
       fillPageContent: function fillPageContent (data){
@@ -82,19 +83,66 @@
         };
       },
       
-      actualBet: [],
-
       selectNumbers: function selectNumbers(){
-        app.actualBet.push(this.textContent);
-        // console.log(app.actualBet)
+        app.handleGameBet.handleNumbers(this);
       },
 
-      handleBet: function handleBet(data){
-        const maxSelectedNumbers = data.min_and_max_number;
-        const price = data.price;
-        app.actualBet.length = maxSelectedNumbers;
+      handleGameBet: {
+        betNumbers: [],
+        data: {},
 
-        console.log(maxSelectedNumbers, price);
+        maxNumbers: function maxNumbers(){
+          return this.data.min_and_max_number;
+        },
+
+        price: function price(){
+          return this.data.price;
+        },
+
+        range: function range(){
+          return this.data.range;
+        },
+
+        selectedNumbers:  function selectedNumbers(arr){
+          return arr.filter(selected => {
+            return selected.className === 'btn-number activeNumber';
+          });
+        },
+
+        notSelectedNumbers: function notSelectedNumbers(arr){
+          return arr.filter(selected => {
+            return selected.className !== 'btn-number activeNumber';
+          });
+        },
+
+        handleNumbers: function(num){
+          let totalNumbers = Array.from(num.parentNode.children);
+          let totalNumbersSelected = this.selectedNumbers(totalNumbers);
+          if(totalNumbersSelected.length < this.maxNumbers()){
+            return num.classList.toggle('activeNumber');
+          } 
+          alert('The game is alread complete, add this game in the cart!');
+        },
+
+        completeGame: function completeGame(){
+          let numbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
+          let selected = app.handleGameBet.selectedNumbers(numbers);
+          let notSelected = app.handleGameBet.notSelectedNumbers(numbers);
+          let missing = app.handleGameBet.maxNumbers() - selected.length;
+          if(missing === 0)
+            return alert('The game is alread complete, add this game in the cart!');
+          for(let i = 0; i < missing; i++){
+            notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+          }
+          console.log('aleatorio', Math.floor(Math.random() * notSelected.length))
+          console.log('complete', notSelected.length, selected.length, missing);
+        },
+
+        clearGame: function clearGame(){
+          let selectedNumbers = Array.from(doc.querySelector('[data-js="game-numbers"]').children);
+          app.handleGameBet.betNumbers.length = 0;
+          return selectedNumbers.forEach(number => number.classList.remove('activeNumber')) || '';
+        },
       },
 
       requireData: function requireData (callback){
