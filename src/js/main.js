@@ -199,11 +199,22 @@
           cartItens.appendChild(fragment);
         },
 
+        deleteCartItem: function deleteCartItem(){
+          let parentNode = doc.querySelector('[data-js="cart-itens"]');
+          const toBeDeleted = this.parentNode;
+          parentNode.removeChild(toBeDeleted);
+          return parentNode;
+        },
+
         imgFactory: function imgFactory(){
+          let button = doc.createElement('button');
           let img = doc.createElement('img');
+          button.setAttribute('class', 'cart-item-delete');
           img.setAttribute('src', 'src/img/icons/trash_gray.png');
           img.setAttribute('alt', 'remove item from cart');
-          return img;
+          button.appendChild(img);
+          button.addEventListener('click', this.deleteCartItem);
+          return button;
         },
 
         contentFactory: function contentFactory(){
