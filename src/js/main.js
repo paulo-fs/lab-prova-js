@@ -162,12 +162,78 @@
             return alert('Is missing ' + app.handleGameBet.missingNumber() +  ' numbers. Please, complete the game before add to cart!')
           const selected = app.handleGameBet.selectedElements();
           const selectedNumbers = selected.map(selected => selected.textContent);
-          console.log ({
+          app.handleCart.gameData ={
             bet: selectedNumbers,
             betType: app.handleGameBet.type(),
             betPrice: app.handleGameBet.price(),
-          });
+          };
+          app.handleCart.createCartItem();
         }
+      },
+
+      handleCart: {
+        gameData: {},
+
+        createCartItem: function createCartItem(){
+          let fragment = doc.createDocumentFragment();
+          let cartItens = doc.querySelector('[data-js="cart-itens"]');
+          let cartItem = doc.createElement('div');
+          cartItem.setAttribute('class', 'cart-item');
+          cartItem.appendChild(this.imgFactory());
+          cartItem.appendChild(this.contentFactory());
+          fragment.appendChild(cartItem);
+          cartItens.appendChild(fragment);
+        },
+
+        imgFactory: function imgFactory(){
+          let img = doc.createElement('img');
+          img.setAttribute('src', 'src/img/icons/trash_gray.png');
+          img.setAttribute('alt', 'remove item from cart');
+          return img;
+        },
+
+        contentFactory: function contentFactory(){
+          let div = doc.createElement('div');
+          let betType = this.gameData.betType;
+          betType = betType.toLowerCase();
+          div.setAttribute('class', `cart-item-data cart-item-${betType}`);
+          div.appendChild(this.pFactory());
+          div.appendChild(this.typePriceFactory());
+          return div;
+        },
+
+        pFactory: function pFactory(){
+          let p = doc.createElement('p');
+          let pContent = Array.from(this.gameData.bet);
+          p.setAttribute('class', 'small');
+          p.textContent = pContent;
+          return p;
+        },
+
+        typePriceFactory: function(){
+          let div = doc.createElement('div');
+          div.setAttribute('class', 'cart-item-data-game');
+          div.appendChild(this.pTypeFactory());
+          div.appendChild(this.pPriceFactory());
+          return div;
+        },
+
+        pTypeFactory: function pTypeFactory(){
+          let pType = doc.createElement('p');
+          let pClass = this.gameData.betType;
+          pClass = pClass.toLowerCase();
+          pType.setAttribute('class', pClass);
+          pType.textContent = this.gameData.betType;
+          return pType;
+        },
+
+        pPriceFactory: function pPriceFactory(){
+          let pPrice = doc.createElement('p');
+          let price = this.gameData.betPrice.toFixed(2).replace('.', ',');
+          pPrice.setAttribute('class', 'price');
+          pPrice.textContent = 'R$' + price;
+          return pPrice;
+        },
       },
 
       requireData: function requireData (callback){
