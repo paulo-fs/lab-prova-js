@@ -25,7 +25,7 @@
 
       handleToggleGames: function(data){
         let buttons = Array.from(doc.querySelectorAll('.btn-game'));
-        let lotofacil = doc.querySelector('.btn-game--lotofacil');
+        let lotofacil = doc.querySelector('.btn-game--lotofácil');
 
         lotofacil.classList.add('active');
         buttons.forEach((button, index) => {
@@ -63,14 +63,9 @@
       },
 
       insertClassOnButton: function insertClassOnButton(game){
-        switch(game.type){
-          case 'Lotofácil':
-            return 'btn-game btn-game--lotofacil';
-          case 'Mega-Sena':
-            return 'btn-game btn-game--mega';
-          case 'Quina':
-            return 'btn-game btn-game--quina'
-        }
+        let classe = game.type;
+        classe = classe.toLowerCase();
+        return `btn-game btn-game--${classe}`;
       },
 
       createBetNumbers: function createBetNumbers(data){
@@ -141,13 +136,10 @@
           if(app.handleGameBet.missingNumber() === 0)
             return alert('The game is alread complete, add this game to cart!');
           for(let i = 0; i < app.handleGameBet.missingNumber(); i++){
-            notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
-            if(app.handleGameBet.missingNumber() !== 0)
-              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
-            if(app.handleGameBet.missingNumber() !== 0)
-              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
-            if(app.handleGameBet.missingNumber() !== 0)
-              notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+            for(let j = 0; j <= 40; j++){
+              if(app.handleGameBet.missingNumber() !== 0)
+                notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
+            }
           }
         },
 
@@ -168,6 +160,7 @@
           };
           app.handleCart.createCartItem();
           app.handleCart.calcTotalCart();
+          app.handleGameBet.clearGame();
         }
       },
 
