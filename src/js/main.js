@@ -6,6 +6,7 @@
       init: function (){
         console.log('app started');
         this.requireData (this.loadStartScreen);
+        app.handleCart.showTotal();
         doc.querySelector('[data-js="complete-game"]').addEventListener('click', app.handleGameBet.completeGame);
         doc.querySelector('[data-js="clear-game"]').addEventListener('click', app.handleGameBet.clearGame);
         doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', app.handleGameBet.addToCart);
@@ -148,8 +149,6 @@
             if(app.handleGameBet.missingNumber() !== 0)
               notSelected[Math.floor(Math.random() * notSelected.length)].classList.add('activeNumber');
           }
-          console.log('aleatorio', Math.floor(Math.random() * notSelected.length))
-          console.log('complete', notSelected.length, app.handleGameBet.missingNumber());
         },
 
         clearGame: function clearGame(){
@@ -168,11 +167,26 @@
             betPrice: app.handleGameBet.price(),
           };
           app.handleCart.createCartItem();
+          app.handleCart.calcTotalCart();
         }
       },
 
       handleCart: {
         gameData: {},
+
+        total: 0,
+
+        showTotal: function(){
+          let divTotal = doc.querySelector('[data-js="total"]');
+          let total = this.total.toFixed(2).replace('.', ',');
+          divTotal.textContent = 'total: R$' + total;
+        },
+
+        calcTotalCart: function(){
+          let betPrice = this.gameData.betPrice;
+          this.total += betPrice;
+          this.showTotal();
+        },
 
         createCartItem: function createCartItem(){
           let fragment = doc.createDocumentFragment();
