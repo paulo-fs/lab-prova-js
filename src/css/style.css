@@ -414,7 +414,12 @@ aside.cart{
   gap: 12px;
 }
 
-.cart-item>img{
+.cart-item-delete{
+  border: none;
+  background-color: var(--color-white);
+}
+
+.cart-item>button>img{
   width: 18px;
   height: 21px;
 }
