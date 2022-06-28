@@ -202,8 +202,12 @@
         deleteCartItem: function deleteCartItem(){
           let parentNode = doc.querySelector('[data-js="cart-itens"]');
           const toBeDeleted = this.parentNode;
+          let betPrice = toBeDeleted.querySelector('.price').textContent.replace('R$', '').replace(',', '.');
+          betPrice = parseFloat(betPrice);
+          app.handleCart.total -= betPrice;
+          app.handleCart.showTotal();
+          console.log(typeof betPrice)
           parentNode.removeChild(toBeDeleted);
-          return parentNode;
         },
 
         imgFactory: function imgFactory(){
