@@ -1,12 +1,12 @@
-(function(win, doc){
+(function(_win, doc){
   'use strict'
 
   let app = (function (){
     return {
       init: function (){
-        console.log('app started');
         this.requireData (this.loadStartScreen);
         app.handleCart.showTotal();
+        app.handleCart.emptyCart();
         doc.querySelector('[data-js="complete-game"]').addEventListener('click', app.handleGameBet.completeGame);
         doc.querySelector('[data-js="clear-game"]').addEventListener('click', app.handleGameBet.clearGame);
         doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', app.handleGameBet.addToCart);
@@ -24,7 +24,7 @@
       },
 
       handleToggleGames: function(data){
-        let buttons = Array.from(doc.querySelectorAll('.btn-game'));
+        const buttons = Array.from(doc.querySelectorAll('.btn-game'));
         let lotofacil = doc.querySelector('.btn-game--lotofácil');
 
         lotofacil.classList.add('active');
@@ -127,7 +127,10 @@
           let totalNumbersSelected = this.selectedElements();
           if(totalNumbersSelected.length < this.maxNumbers()){
             return num.classList.toggle('activeNumber');
-          } 
+          }
+          if(num.className === 'btn-number activeNumber'){
+            return num.classList.remove('activeNumber')
+          }
           alert('The game is alread complete, add this game to cart!');
         },
 
@@ -160,6 +163,7 @@
           };
           app.handleCart.createCartItem();
           app.handleCart.calcTotalCart();
+          app.handleCart.removeEmptyCart();
           app.handleGameBet.clearGame();
         }
       },
@@ -168,6 +172,34 @@
         gameData: {},
 
         total: 0,
+
+        emptyCart: function(){
+          const cartItem = doc.querySelectorAll('.cart-item');
+          if(cartItem.length === 0)
+            return this.showEmptyCart();
+          return this.removeEmptyCart();
+        },
+
+        showEmptyCart: function(){
+          const cartItens = doc.querySelector('[data-js="cart-itens"]');
+          const div = doc.createElement('div');
+          const p1 = doc.createElement('p');
+          const p2 = doc.createElement('p');
+          div.setAttribute('class', 'cart-empty');
+          p1.textContent = 'Cart empty';
+          p2.textContent = 'Make your bet!';
+          div.appendChild(p1);
+          div.appendChild(p2);
+          cartItens.appendChild(div);
+          return cartItens;
+        },
+
+        removeEmptyCart: function removeEmptyCart(){
+          const cartItens = doc.querySelector('[data-js="cart-itens"]');
+          const emptyCartMsg = doc.querySelector('.cart-empty');
+          if(emptyCartMsg)
+            cartItens.removeChild(emptyCartMsg);
+        },
 
         showTotal: function(){
           let divTotal = doc.querySelector('[data-js="total"]');
@@ -192,15 +224,23 @@
           cartItens.appendChild(fragment);
         },
 
+        confirmDelete: function(){
+          if(confirm('Are you sure you want to delete this bet?'))
+            return true;
+          return false;
+        },
+
         deleteCartItem: function deleteCartItem(){
-          let parentNode = doc.querySelector('[data-js="cart-itens"]');
+          if(!app.handleCart.confirmDelete())
+            return;
+          const parentNode = doc.querySelector('[data-js="cart-itens"]');
           const toBeDeleted = this.parentNode;
           let betPrice = toBeDeleted.querySelector('.price').textContent.replace('R$', '').replace(',', '.');
           betPrice = parseFloat(betPrice);
           app.handleCart.total -= betPrice;
           app.handleCart.showTotal();
-          console.log(typeof betPrice)
           parentNode.removeChild(toBeDeleted);
+          app.handleCart.emptyCart();
         },
 
         imgFactory: function imgFactory(){

@@ -24,6 +24,14 @@
       "price": 2,
       "min_and_max_number": 5,
       "color": "#F79C31"
+    },
+    {
+      "type": "Lotomania",
+      "description": "Choose 2 numbers of 10 avaliable on lotomania. Win by hitting 5, 4, 3, or 2. Six sweeptakes are made by week and six chances to win.",
+      "range": 10,
+      "price": 50,
+      "min_and_max_number": 2,
+      "color": "#FF33CE"
     }
   ]
 }
