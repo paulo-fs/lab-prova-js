@@ -16,6 +16,7 @@
         if(this.readyState !== 4 && this.state !== 200)
           return;
         const data = JSON.parse(this.responseText).types;
+        app.data = data;
         app.createGameOptions(data);
         app.handleToggleGames(data);
         app.handleGameBet.data = data[0];
@@ -23,17 +24,41 @@
         app.createBetNumbers(data[0]);
       },
 
+      data: {},
+
       handleToggleGames: function(data){
         const buttons = Array.from(doc.querySelectorAll('.btn-game'));
-        let lotofacil = doc.querySelector('.btn-game--lotofácil');
-
-        lotofacil.classList.add('active');
+        function active(index=0){  
+          return `background-color: ${data[index].color};
+          border-color: ${data[index].color};
+          color: #fff;`
+        };
+        app.isInactiveGame();
+        buttons[0].setAttribute('style', active());
         buttons.forEach((button, index) => {
+          button.onmouseenter = () => {
+            button.style.filter = 'brightness(90%)';
+          };
+          button.onmouseleave = () => {
+            button.style.filter = 'brightness(100%)';
+          };
           button.addEventListener('click', () => {
-            buttons.forEach(eachButton => eachButton.classList.remove('active') || '');
-            button.classList.toggle('active');
+            app.isInactiveGame();
+            button.setAttribute('style', active(index));
             app.loadSelectedGameContent(data[index]);
           });
+        });
+      },
+
+      isInactiveGame: function(){
+        const data = app.data;
+        const buttons = Array.from(doc.querySelectorAll('.btn-game'));
+        buttons.forEach((button, index) => {
+          button.setAttribute('style', `
+            background-color: 'transparente';
+            border-color: ${data[index].color};
+            color: ${data[index].color};
+          `);
         });
       },
 
@@ -56,16 +81,10 @@
         let avaliableGames = doc.querySelector('[data-js="avaliable-games"]');
         data.forEach(game => {
           let button = doc.createElement('button');
-          button.setAttribute('class', app.insertClassOnButton(game));
+          button.setAttribute('class', 'btn-game');
           button.textContent = game.type;
           avaliableGames.appendChild(button);
         });
-      },
-
-      insertClassOnButton: function insertClassOnButton(game){
-        let classe = game.type;
-        classe = classe.toLowerCase();
-        return `btn-game btn-game--${classe}`;
       },
 
       createBetNumbers: function createBetNumbers(data){
@@ -101,6 +120,10 @@
 
         type: function type(){
           return this.data.type;
+        },
+
+        color: function color(){
+          return this.data.color;
         },
 
         selectedElements:  function selectedElements(){
@@ -160,6 +183,7 @@
             bet: selectedNumbers,
             betType: app.handleGameBet.type(),
             betPrice: app.handleGameBet.price(),
+            betColor: app.handleGameBet.color()
           };
           app.handleCart.createCartItem();
           app.handleCart.calcTotalCart();
@@ -258,7 +282,8 @@
           let div = doc.createElement('div');
           let betType = this.gameData.betType;
           betType = betType.toLowerCase();
-          div.setAttribute('class', `cart-item-data cart-item-${betType}`);
+          div.setAttribute('class', `cart-item-data cart-item-game`);
+          div.setAttribute('style', `border-color: ${this.gameData.betColor}`);
           div.appendChild(this.pFactory());
           div.appendChild(this.typePriceFactory());
           return div;
@@ -282,9 +307,9 @@
 
         pTypeFactory: function pTypeFactory(){
           let pType = doc.createElement('p');
-          let pClass = this.gameData.betType;
-          pClass = pClass.toLowerCase();
-          pType.setAttribute('class', pClass);
+          let pColor = this.gameData.betColor;
+          pType.setAttribute('class', 'game');
+          pType.setAttribute('style', `color: ${pColor}`);
           pType.textContent = this.gameData.betType;
           return pType;
         },

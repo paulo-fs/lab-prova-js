@@ -102,49 +102,18 @@ a{
 }
 
 .btn-game{
-  --color-game: var(var(--color-white));
   font-size: var(--font-size-7);
   font-weight: var(--font-weight-bold);
   font-style: italic;
   padding: 8px 28px;
   background-color: var(--color-background);
-  border: 2px solid var(--color-game);
+  border: 2px solid var(--color-dividers);
   border-radius: 32px;
   transition: 0.2s ease;
 }
 
-.btn-game--mega-sena{
-  --color-game: var(--color-megasena);
-  color: var(--color-game);
-}
-
-.btn-game--mega-sena:hover{
-  background-color: var(--color-game);
-  color: var(--color-white);
-}
-
-.btn-game--lotofácil{
-  --color-game: var(--color-lotofacil);
-  color: var(--color-game);
-}
-
-.btn-game--lotofácil:hover{
-  background-color: var(--color-game);
-  color: var(--color-white);
-}
-
-.btn-game--quina{
-  --color-game: var(--color-quina);
-  color: var(--color-game);
-}
-
-.btn-game--quina:hover{
-  background-color: var(--color-game);
-  color: var(--color-white);
-}
-
 .active{
-  background-color: var(--color-game);
+  background-color: inherit;
   color: var(--color-white);
 }
 
@@ -242,22 +211,10 @@ p.price{
   font-style: normal;
 }
 
-p.lotofácil{
+p.game{
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-5);
-  color: var(--color-lotofacil);
-}
-
-p.quina{
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-5);
-  color: var(--color-quina);
-}
-
-p.mega-sena{
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-5);
-  color: var(--color-megasena);
+  color: var(--color-text);
 }
 
 p.copyright{
@@ -290,7 +247,7 @@ p.copyright{
   border-radius: 4px;
   background-color: var(--color-tgl);
   position: absolute;
-  bottom: -4px;   right: -9px;
+  bottom: -9px;   right: -9px;
 }
 
 .menu-links{
@@ -416,16 +373,8 @@ aside.cart{
   border-radius: 5px;
 }
 
-.cart-item-mega-sena{
-  border-left: 4px solid var(--color-megasena);
-}
-
-.cart-item-quina{
-  border-left: 4px solid var(--color-quina);
-}
-
-.cart-item-lotofácil{
-  border-left: 4px solid var(--color-lotofacil);
+.cart-item-game{
+  border-left: 4px solid var(--color-dividers);
 }
 
 .cart-item-data-game{
