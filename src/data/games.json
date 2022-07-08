@@ -3,7 +3,7 @@
   "types": [
     {
       "type": "Lotofácil",
-      "description": "Choose 15 numbers to bet in lotofácil. Win by hitting 11, 12, 13, 14 or 15 numbers.You have many chances to win and now, you can play of anywhere!",
+      "description": "Choose 15 number to bet on lotofácil. Win by hitting 11, 12, 13, 14 ou 15 numbers. There are many chances to win!",
       "range": 25,
       "price": 2.5,
       "min_and_max_number": 15,
